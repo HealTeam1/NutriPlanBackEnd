@@ -16,6 +16,15 @@ async function main() {
 
     console.log('Conectado a MySQL correctamente');
 
+    app.get('/', async (req, res) => {
+      try {
+        const [rows] = await connection.query('SELECT NOW() AS now');
+        res.json(rows);
+      } catch (error) {
+        res.status(500).send('Error en consulta');
+      }
+    });
+
     app.listen(process.env.PORT || 3000, () => {
       console.log(`Servidor corriendo en puerto ${process.env.PORT || 3000}`);
     });
