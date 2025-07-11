@@ -1,20 +1,25 @@
-require('dotenv').config();
 const express = require('express');
-const db = require('./db');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+require('dotenv').config();
+require('./config/db'); // ✅ importante: importa la conexión
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./swagger'); // tu configuración de swagger
+
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
-
-app.get('/', (req, res) => {
-  db.query('SELECT NOW() AS now', (err, results) => {
-    if (err) {
-      console.error('Error en consulta:', err);
-      return res.status(500).send('Error en consulta');
-    }
-    res.json(results);
-  });
-});
-
 const PORT = process.env.PORT || 3000;
+
+app.use(cors());
+app.use(bodyParser.json());
+
+app.use('/api', authRoutes);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en puerto ${PORT}`);
+  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`📚 Documentación Swagger en http://localhost:${PORT}/api-docs`);
 });
