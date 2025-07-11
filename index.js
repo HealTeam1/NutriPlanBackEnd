@@ -1,26 +1,25 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
 require('dotenv').config();
-require('./config/db');
-
-const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./swagger'); // 👈 import correcto
-
-const authRoutes = require('./routes/authRoutes');
+const express = require('express');
+const mysql = require('mysql2');
 
 const app = express();
-const PORT = 3000;
 
-app.use(cors());
-app.use(bodyParser.json());
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
+});
 
-app.use('/api', authRoutes);
+connection.connect(err => {
+  if (err) {
+    console.error('Error al conectar a MySQL:', err);
+    return;
+  }
+  console.log('Conectado a MySQL correctamente');
+});
 
-// 👇 esta línea crea la ruta con la documentación interactiva
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
-  console.log(`📚 Documentación Swagger en: http://localhost:${PORT}/api-docs`);
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Servidor corriendo en puerto ${process.env.PORT || 3000}`);
 });
