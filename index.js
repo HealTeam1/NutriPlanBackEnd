@@ -1,28 +1,20 @@
+require('dotenv').config();
 const express = require('express');
-const connectDB = require('./config/db');
+const db = require('./db');
 
 const app = express();
 
-async function main() {
-  try {
-    const connection = await connectDB();
+app.get('/', (req, res) => {
+  db.query('SELECT NOW() AS now', (err, results) => {
+    if (err) {
+      console.error('Error en consulta:', err);
+      return res.status(500).send('Error en consulta');
+    }
+    res.json(results);
+  });
+});
 
-    app.get('/', async (req, res) => {
-      try {
-        const [rows] = await connection.query('SELECT NOW() AS now');
-        res.json(rows);
-      } catch (error) {
-        res.status(500).send('Error en consulta');
-      }
-    });
-
-    app.listen(process.env.PORT || 3000, () => {
-      console.log(`Servidor corriendo en puerto ${process.env.PORT || 3000}`);
-    });
-
-  } catch (err) {
-    console.error('Error al conectar a MySQL:', err);
-  }
-}
-
-main();
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en puerto ${PORT}`);
+});
