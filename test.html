@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head><title>Registro Test</title></head>
+<body>
+  <button onclick="registrar()">Registrar</button>
+  <script>
+    function registrar() {
+      fetch("http://localhost:3000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: "prueba@correo.com",
+          password: "123456"
+        })
+      })
+      .then(res => res.json())
+      .then(data => alert(JSON.stringify(data)))
+      .catch(err => console.error(err));
+    }
+  </script>
+</body>
+</html>
+
+//http://localhost:3000/api-docs/#/
+
+node index.js
+
+  // Plan Básico
+      '🥛 1 vaso de leche': 150,
+      '🥣 1 taza de avena': 250,
+      '🍌 1 banana': 100,
+      '🍗 Pechuga de pollo': 200,
+      '🍚 Arroz integral': 180,
+      '🥗 Ensalada': 50,
+      '🥕 Sopa de verduras': 80,
+      '🍞 Pan integral': 100,
+      '🍎 1 manzana': 95,
+      '🍳 Huevo duro': 70,
+
+      // Plan Vegetariano
+      '🍌 Smoothie de plátano': 120,
+      '🥜 Mantequilla de maní': 180,
+      '🍲 Quinoa con garbanzos': 220,
+      '🍅 Tomate y pepino': 60,
+      '🍱 Tofu con vegetales': 190,
+      '🍚 Arroz blanco': 160,
+      '🥦 Brócoli al vapor': 55,
+      '🥗 Ensalada de lentejas': 170,
+      '🍠 Puré de camote': 140,
+      '🍎 Fruta mixta': 100,
+
+      // Plan Keto
+      '🥑 Aguacate con limón': 160,
+      '🍳 Omelette con espinacas': 200,
+      '🧀 Queso curado': 110,
+      '🥓 Tiras de tocino': 180,
+      '🐟 Salmón a la plancha': 210,
+      '🥬 Ensalada con aceite de oliva': 130,
+      '🥜 Nueces mixtas': 170,
+      '🍗 Alitas de pollo al horno': 220,
+      '🍄 Champiñones salteados': 90,
+      '☕ Café con crema': 50,
+
+      // Plan Energético
+      '🥣 Avena con frutos secos': 270,
+      '🍌 Banana': 100,
+      '🥩 Carne magra': 250,
+      '🥗 Ensalada con quinua': 180,
+      '🍠 Camote al horno': 160,
+      '🥤 Batido de proteínas': 200,
+      '🥜 Mix de semillas': 150,
+      '🥚 Huevos cocidos': 70,
+      '🍞 Pan de centeno': 110,
+
+      // Plan Ligero
+      '🍵 Té verde': 5,
+      '🍊 Mandarina': 45,
+      '🥗 Ensalada verde': 40,
+      '🍅 Sopa de tomate': 60,
+      '🐟 Pescado al vapor': 140,
+      '🥒 Bastones de pepino': 20,
+      '🍎 Manzana verde': 80,
+      '🥬 Wrap de lechuga con hummus': 100,
+      '🥕 Zanahorias baby': 30,
+      '🍓 Frutos rojos': 60,
+
+      // Plan Mediterráneo
+      '🥗 Ensalada griega': 150,
+      '🐟 Sardinas en aceite de oliva': 200,
+      '🍅 Tomates cherry con queso feta': 110,
+      '🥖 Pan integral con hummus': 130,
+      '🥒 Tabulé de pepino y perejil': 120,
+      '🫒 Aceitunas negras': 90,
+      '🍊 Naranja fresca': 70,
+      '🥣 Yogur natural con miel': 140,
+      '🌰 Almendras crudas': 160,
+      '🍆 Berenjenas al horno': 85,
+
+      // Plan Alto en Fibra
+      '🥣 Avena con linaza': 260,
+      '🍐 Pera con cáscara': 100,
+      '🥬 Ensalada de espinaca y remolacha': 80,
+      '🍞 Pan integral con aguacate': 180,
+      '🍛 Lentejas guisadas': 220,
+      '🥕 Zanahoria cruda': 35,
+      '🍎 Manzana roja': 95,
+      '🌽 Mazorca cocida': 120,
+      '🍓 Mix de frutos del bosque': 70,
+      '🌰 Nueces y semillas': 170,
